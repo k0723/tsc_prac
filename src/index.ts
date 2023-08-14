@@ -1,58 +1,80 @@
-interface Student {
-    name: string;
-    age: number;
-    scores: {
-      korean: number;
-          math: number;
-          society: number;
-      science: number;
-      english: number;
-    };
+function isValidPassword(password: string): boolean {
+    return password.length >= 8;
   }
   
-  function createStudent(name: string, age: number, korean: number, math: number, society: number, science: number, english: number): Student {
-    return {
-      name,
-      age,
-      scores: {
-              korean,
-        math,
-              society,
-        science,
-        english,
-      },
-    };
+  const password = "q1w2e3r4!";
+  const valid = isValidPassword(password);
+  
+  if (valid) {
+    console.log("유효한 패스워드입니다!");
+  } else {
+    console.log("유효하지 않은 패스워드입니다!");
+  }
+
+  function calculateArea(radius: number): number {
+    return Math.PI * radius * radius;
   }
   
-  function calculateAverage(student: Student): number {
-    const sum = student.scores.korean + student.scores.math + student.scores.society + student.scores.science + student.scores.english;
-    const average = sum / 5;
-    return average;
+  const radius = 5;
+  const area = calculateArea(radius);
+  console.log(`반지름이 ${radius}인 원의 넓이: ${area}`);
+
+  function greet(name: string): string {
+    return `안녕, ${name}!`;
   }
   
-  function assignGrade(average: number): string {
-    if (average >= 90) {
-      return 'A';
-    } else if (average >= 80) {
-      return 'B';
-    } else if (average >= 70) {
-      return 'C';
-    } else if (average >= 60) {
-      return 'D';
+  const name1 = "Spartan";
+  const greeting = greet(name1);
+  console.log(greeting);
+
+  function calculateSum(numbers: number[]): number {
+    let sum: number = 0;
+    for (let i = 0; i < numbers.length; i++) {
+      sum += numbers[i];
+    }
+    return sum;
+  }
+  
+  const testScores: number[] = [90, 85, 78, 92, 88];
+  const sumScore = calculateSum(testScores);
+  console.log(`점수의 총합: ${sumScore}`);
+
+  const person: [string, number, boolean] = ['Spartan', 25, false];
+// const person2: [string, number, boolean] = [25, 'Spartan', false]; // 오류!
+
+enum UserRole {
+    ADMIN = "ADMIN",
+    EDITOR = "EDITOR",
+    USER = "USER",
+  }
+  
+  enum UserLevel {
+    NOT_OPERATOR, // 0
+    OPERATOR // 1
+  }
+  
+  function checkPermission(userRole: UserRole, userLevel: UserLevel): void {
+    if (userLevel === UserLevel.NOT_OPERATOR) {
+      console.log('당신은 일반 사용자 레벨이에요');
     } else {
-      return 'F';
+      console.log('당신은 운영자 레벨이군요');
+    } 
+  
+    if (userRole === UserRole.ADMIN) {
+      console.log("당신은 어드민이군요");
+    } else if (userRole === UserRole.EDITOR) {
+      console.log("당신은 에디터에요");
+    } else {
+      console.log("당신은 사용자군요");
     }
   }
   
-  function printResult(student: Student): void {
-    const average = calculateAverage(student);
-    const grade = assignGrade(average);
-    console.log(`${student.name} (${student.age}세) - 평균: ${average.toFixed(2)}, 학점: ${grade}`);
+  const userRole: UserRole = UserRole.EDITOR;
+  const userLevel: UserLevel = UserLevel.NOT_OPERATOR;
+  checkPermission(userRole, userLevel);
+
+  function main()
+  {
+
   }
-  
-  function main(): void {
-      const spartan = createStudent('Spartan', 30, 95, 89, 76, 90, 97);
-      printResult(spartan);
-  }
-  
-  main(); // main 함수를 호출하는 코드가 당연히 있어야 실행이 되겠죠?
+  main();
